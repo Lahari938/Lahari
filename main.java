@@ -1,24 +1,16 @@
-import java.util.*;
-public  class Main {
-public static void main(String[]args) {
-int[][] a={{1,2}, 
-           {3,4}
-};
-int[][] b={{1,2}, 
-		   {3,4}
-};
-int[][] result=new int[2][2];
-for(int i=0;i<2;i++) {
-for(int j=0;j<2;j++) {
-result[i][j]=a[i][j]+b[i][j];
+import java.util.Scanner;
+public class main {
+public static void main(String args[]){
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter a string:");
+String input=sc.nextLine();
+String reversed=new StringBuilder(input).reverse().toString();
+if(input.equals(reversed)) {
+System.out.println(input+"is a palindrome");
 }
-}
-System.out.println("addition");
-for(int[]row:result) {
-for(int val:row) {
-System.out.println(val+"");
-System.out.println();
-}
+else
+{
+System.out.println(input+"is not a palindrome");
 }
 }
 }
