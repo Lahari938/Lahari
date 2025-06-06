@@ -1,0 +1,79 @@
+import java.util.*;
+
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int val) { this.val = val; }
+}
+
+class TreeNode {
+    int val;
+    TreeNode left, right;
+    TreeNode(int val) { this.val = val; }
+}
+
+public class Main {
+    public TreeNode sortedListToBST(ListNode head) {
+        if (head == null) return null;
+        if (head.next == null) return new TreeNode(head.val);
+
+        ListNode slow = head, fast = head, slow_Prev = null;
+        while (fast != null && fast.next != null) {
+            slow_Prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        TreeNode root = new TreeNode(slow.val);
+
+        if (slow_Prev != null) {
+            slow_Prev.next = null;
+            root.left = sortedListToBST(head);
+        }
+
+        root.right = sortedListToBST(slow.next);
+
+        return root;
+    }
+
+    public static ListNode buildList(int[] arr) {
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
+        for (int val : arr) {
+            curr.next = new ListNode(val);
+            curr = curr.next;
+        }
+        return dummy.next;
+    }
+
+    public static List<Integer> levelOrder(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        if (root == null) return result;
+
+        q.add(root);
+        while (!q.isEmpty()) {
+            TreeNode node = q.poll();
+            if (node != null) {
+                result.add(node.val);
+                q.add(node.left);
+                q.add(node.right);
+            } else {
+                result.add(null);
+            }
+        }
+
+        while (!result.isEmpty() && result.get(result.size() - 1) == null)
+            result.remove(result.size() - 1);
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] input = {-10, -3, 0, 5, 9};
+        ListNode head = buildList(input);
+        Main obj = new Main();
+        TreeNode bstRoot = obj.sortedListToBST(head);
+        System.out.println(levelOrder(bstRoot));  // Output: [0, -3, 9, -10, null, 5]
+    }
+}
