@@ -1,0 +1,13 @@
+import java.util.*;
+public class MaxheapExample {
+public static void main(String[]args) {
+PriorityQueue<Integer>maxheap=new PriorityQueue<>(Collections.reverseOrder());
+maxheap.add(10);
+maxheap.add(5);
+maxheap.add(20);
+maxheap.add(3);
+while(!maxheap.isEmpty()) {
+System.out.print(maxheap.poll()+" ");
+}
+}
+}
