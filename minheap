@@ -1,0 +1,13 @@
+import java.util.*;
+public class MinheapExample {
+public static void main(String[]args) {
+PriorityQueue<Integer>minheap=new PriorityQueue<>();
+minheap.add(10);
+minheap.add(5);
+minheap.add(20);
+minheap.add(3);
+while(!minheap.isEmpty()) {
+System.out.print(minheap.poll()+" ");
+}
+}
+}
